@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/activities")
@@ -20,8 +22,10 @@ public class ActivityController {
         return ResponseEntity.ok(activityService.trackActivity(request));
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<ActivityResponse>> trackActivity() {
-//        return "";
-//    }
+    @GetMapping
+    public ResponseEntity<List<ActivityResponse>> getUserActivities(
+            @RequestHeader(value = "X-User-ID") String userId
+    ) {
+        return ResponseEntity.ok(activityService.getUserActivities(userId));
+    }
 }
